@@ -144,7 +144,7 @@ resource "aws_instance" "std_ec2" {
     ami = "ami-049a62eb90480f276"
     instance_type = var.settings.std_ec2.instance_type
     subnet_id = aws_subnet.stdb_public_subnet[count.index].id
-    key_name = "ubuntu_mumbai_keypair"
+    key_name = "stdInfra_accessKey"
     vpc_security_group_ids = [aws_security_group.std_ec2_sg.id]
     tags = {
         Name = "std_ec2"
@@ -157,4 +157,7 @@ resource "aws_eip" "std_ec2_eip" {
     tags = {
         Name = "std_ec2_eip"
     }
+}
+output "ec2_ip" {
+  value = aws_instance.std_ec2[0].public_ip
 }
