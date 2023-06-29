@@ -16,6 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Enable verbose output
+        run: set -x
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
