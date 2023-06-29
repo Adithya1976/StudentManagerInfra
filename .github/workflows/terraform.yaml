@@ -32,19 +32,19 @@ jobs:
 
       - name: generate access key-pair
         run: |
-          aws --version
-      #     chmod 400 stdInfra_accessKey.pem
+          aws ec2 create-key-pair --key-name stdInfra_accessKey --query 'KeyMaterial' --output text > stdInfra_accessKey.pem
+          chmod 400 stdInfra_accessKey.pem
 
-      # - name: create instances
-      #   run: |
-      #     terraform init
-      #     terraform plan
-      #     terraform apply -auto-approve
-      #     ip_address=$(terraform output -raw ec2_ip)
+      - name: create instances
+        run: |
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+          ip_address=$(terraform output -raw ec2_ip)
       
-      # - name: send .jar and docker files
-      #   run: |
-      #     scp -i stdInfra_accessKey.pem Dockerfile ec2-user@$ip_address:.
+      - name: send .jar and docker files
+        run: |
+          scp -i stdInfra_accessKey.pem Dockerfile ec2-user@$ip_address:.
           
 
       
