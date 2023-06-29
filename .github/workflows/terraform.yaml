@@ -32,7 +32,7 @@ jobs:
 
       - name: generate access key-pair
         run: |
-          aws ec2 create-key-pair --key-name stdInfra_accessKey --query 'KeyMaterial' --output text > stdInfra_accessKey.pem
+          aws --version
       #     chmod 400 stdInfra_accessKey.pem
 
       # - name: create instances
